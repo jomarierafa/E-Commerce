@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	showAllProduct();
+	load_data();
 	//add product
 	$(document).on('submit', '#user_form', function(event){  
            event.preventDefault();  
@@ -21,7 +21,7 @@ $(document).ready(function(){
 	                 contentType:false,  
 	                 processData:false,  
                      success:function(data){
-                     	  showAllProduct();   
+                     	  load_data(); 
                           $('#user_form')[0].reset();  
                           $('#myModal').modal('hide'); 
                           swal("Item Added!", product + " is added in the inventory", "success"); 	                	
@@ -34,40 +34,10 @@ $(document).ready(function(){
            }  
     });
 
-	//show product
-    function showAllProduct(){
-			$.ajax({
-				type: 'ajax',
-				url: $('#url').val() + 'product/showAllProduct',
-				async: false,
-				dataType: 'json',
-				success: function(data){
-					var html = "";
-					var i;
-					for(i = 0; i < data.length; i++){
-						html += '<tr>' +
-									'<td>'+data[i].productcode+'</td>' +
-									'<td><img src="'+ $('#url').val() +'assets/images/'+data[i].image+'" width="50px"></td>' +
-									'<td>'+data[i].productname+'</td>' +
-									'<td>'+data[i].stock+'</td>' +
-									'<td>'+data[i].price+'</td>' +
-									'<td>' +
-										'<a href="javascript:;" class="btn btn-info item-add" data="'+data[i].id+'"><i class="fa fa-plus-square" aria-hidden="true"></i></a>'+
-										'<a href="javascript:;" class="btn btn-danger item-delete" data="'+data[i].id+'"><i class="fa fa-trash" aria-hidden="true"></i></a>'+
-									'</td>' +
-								'</tr>';
-					}
-					$('#showData').html(html);
-				},
-				error: function(){
-					swal("Error","Could not Load Database", "error");
-				}
-			});
-	}
 
 		//add product
 	$(document).on('click', '.item-delete', function(){
-		var product_id = $(this).attr("data");
+			var product_id = $(this).attr("data");
 			swal({
 				title: "Are you sure?",
 				text: "Once deleted, you will not be able to recover this data!",
@@ -78,18 +48,18 @@ $(document).ready(function(){
 			.then((willDelete) => {
 				if (willDelete) {
 					$.ajax({
-					url: $('#url').val() + 'product/deleteProduct',
-					method: "POST",
-					data:{product_id:product_id},
-					success:function(data){
-						showAllProduct();
-						swal("Data has been deleted!", {
-						    icon: "success",
-						});
-					}
-				});
-			} 
-		});			
+						url: $('#url').val() + 'product/deleteProduct',
+						method: "POST",
+						data:{product_id:product_id},
+						success:function(data){
+							load_data();
+							swal("Data has been deleted!", {
+							    icon: "success",
+							});
+						}
+					});
+				} 
+			});			
 	});	
 
 	//add quantity to the item
@@ -109,6 +79,8 @@ $(document).ready(function(){
 				}				
 		});
 	});	
+
+
 	$(document).on('submit', '#quantity_form', function(event){  
 		   event.preventDefault();  
            var quantity = $('#quantity').val();  
@@ -125,7 +97,7 @@ $(document).ready(function(){
                           $('#quantity_form')[0].reset();  
                           $('#addItemModal').modal('hide'); 
                           swal("Item Added!", "Additional " + quantity + "has been added", "success"); 	  
-                          showAllProduct();              	
+                          load_data();              	
                      }  
                 });  
            }  
@@ -136,6 +108,26 @@ $(document).ready(function(){
 
 	});
 
+	
 
+	function load_data(query){
+	    	$.ajax({
+	    		url: $('#url').val() + 'product/fetch',
+	    		method: "POST",
+	    		data: {query:query},
+	    		success: function(data){
+	    			$("#result").html(data);
+	    		}
+	    	})
+	}
+
+	$('#search').keyup(function(){
+		var search = $(this).val();
+		if(search != ''){
+			load_data(search);
+		}else{
+			load_data();
+		}
+	});
 
 });	

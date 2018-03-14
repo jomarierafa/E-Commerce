@@ -3,22 +3,14 @@
 <div class="alert alert-success" style="display:none;">
 	
 </div>
+<input type="text" name="search" id="search" placeholder="search">
 
-<table class="table table-hover" style="margin-top: 20px;">
-	<thead>
-		<tr>
-			<th>Code</th>
-			<th>Image</th>
-			<th>Product</th>
-			<th>Stock</th>
-			<th>Price</th>
-			<th>action</th>
-		</tr>
-	</thead>
-	<tbody id = "showData">
+<div id="result" style="margin-top: 10px;">
+  <h1> No Current Data </h1>  
+</div>
+
 		
-	</tbody>
-</table>	
+	
 <!--modal for add -->
 <div id="myModal" class="modal fade-scale">  
       <div class="modal-dialog">  

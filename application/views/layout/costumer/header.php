@@ -14,7 +14,7 @@
     <link href="<?php echo base_url()?>assets/costumer/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo base_url()?>assets/css/shop-homepage.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/costumer/css/shop-homepage.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="<?php echo base_url()?>costumer">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -47,6 +47,6 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container" style="margin-top: 50px">
+    <div class="container">
 
 
