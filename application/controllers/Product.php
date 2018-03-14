@@ -52,15 +52,16 @@
 
 
       	public function fetch_single_product(){
-	    		$output = array();
-	    		$data = $this->m->fetch_single_product($_POST["product_id"]);	
+	    	$output = array();
+	    	$data = $this->m->fetch_single_product($_POST["product_id"]);	
 
-	    		foreach ($data as $row) {
-	    			$output['product'] = $row->productname;
-	    			$output['stock'] = $row->stock;
-	    		}
+	    	foreach ($data as $row) {
+	    		$output['product'] = $row->productname;
+	    		$output['price'] = $row->price;
+	    		$output['stock'] = $row->stock;
+	    	}
 
-	    		echo json_encode($output);
+	    	echo json_encode($output);
 	    }
 
 	    public function addProductQuantity(){
@@ -75,6 +76,23 @@
 
 	    public function deleteProduct(){
 	    	$this->m->deleteProduct($_POST["product_id"]);
+	    }
+
+	    public function editProduct(){
+	    	$productname = $this->input->post("editproduct");
+	    	$price = $this->input->post("editprice");
+	    	$stock = $this->input->post("editstock");
+	    	
+	    	$updated_data = array(
+	    		'productname' 	=> $productname,
+	    		'price'			=> $price,
+	    		'stock'			=> $stock
+	    	);
+
+	    	//this is updating , im hust using the model function of addProduct quantity
+           	$this->m->addProductQuantity($this->input->post("edit_product_id"), $updated_data);
+
+           
 	    }
 
 
@@ -154,6 +172,7 @@
 			       <td>
 			       		<a href="javascript:;" class="btn btn-info item-add" data="'.$row->id.'"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
 						<a href="javascript:;" class="btn btn-danger item-delete" data="'.$row->id.'"><i class="fa fa-trash" aria-hidden="true"></i></a>
+						<a href="javascript:;" class="btn btn-success item-edit" data="'.$row->id.'"><i class="fa fa-edit" aria-hidden="true"></i></a>
 			       </td>
 			      </tr>';
 			   }

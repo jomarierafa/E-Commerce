@@ -52,12 +52,41 @@
                      </div>  
                      <div class="modal-body">  
                           <label>Quantity</label>  
-                          <input type="text" name="quantity" id="quantity" class="form-control" />  
+                          <input type="text" name="quantity" id="quantity" class="form-control" onkeyup="this.value = this.value.replace(/[^0-9\s.]/, '')"/>  
                      </div>  
                      <div class="modal-footer">  
                           <input type="hidden" name="stock" id="stock" />  
                           <input type="hidden" name="product_id" id="product_id" />                       
                           <input type="submit" name="submit" id="submit" class="btn btn-success" value="Add" />  
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
+                     </div>  
+                </div>  
+           </form>  
+      </div>  
+ </div>
+
+ <div id="editModal" class="modal fade-scale">  
+      <div class="modal-dialog">  
+           <form method="post" id="edit_form">  
+                <div class="modal-content">  
+                     <div class="modal-header">  
+                        <h4 class="modal-title">Edit Product</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>    
+                     </div>  
+                     <div class="modal-body">  
+                          <label>Product Name</label>  
+                          <input type="text" name="editproduct" id="editproduct" class="form-control" />  
+                          <br>
+                           <label>Stock</label>  
+                          <input type="text" name="editstock" id="editstock" class="form-control" />  
+                          <br>    
+                          <label>Price</label>  
+                          <input type="text" name="editprice" id="editprice" class="form-control" />  
+                          <br>  
+                     </div>  
+                     <div class="modal-footer">  
+                          <input type="hidden" name="edit_product_id" id="edit_product_id" />                       
+                          <input type="submit" name="submit" id="submit" class="btn btn-success" value="Save" />  
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>  
                      </div>  
                 </div>  

@@ -4,9 +4,9 @@
 
           <h1 class="my-4">Black Market</h1>
           <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+            <a href="#" class="list-group-item">...</a>
+            <a href="#" class="list-group-item">...</a>
+            <a href="#" class="list-group-item">...</a>
             <input type="text" class="list-group-item" name="search" id="search" placeholder="Search ..." />
           </div>
          
@@ -99,7 +99,7 @@
                      </div>  
                      <div class="modal-body">  
                           <label>Quantity</label>  
-                          <input type="text" name="quantity" id="quantity" class="form-control" />  
+                          <input type="text" name="quantity" id="quantity" class="form-control" onkeyup="this.value = this.value.replace(/[^0-9\s.]/, '')"/>  
                      </div>  
                      <div class="modal-footer">  
                           <input type="hidden" name="code" id="code" />

@@ -62,6 +62,52 @@ $(document).ready(function(){
 			});			
 	});	
 
+	//edit
+	$(document).on('click', '.item-edit', function(){
+		var product_id = $(this).attr("data");
+		$.ajax({
+			type: 'ajax',
+			url: $('#url').val() + 'product/fetch_single_product',
+			method:"POST",
+			data:{product_id: product_id},
+			dataType: 'json',
+			success: function(data){
+				$('#editModal').modal('show');
+				$('#edit_product_id').val(product_id);
+				$('#editproduct').val(data.product);
+				$('#editprice').val(data.price);
+				$('#editstock').val(data.stock);
+			}				
+		});
+	});
+	$(document).on('submit', '#edit_form', function(event){  
+		   event.preventDefault();  
+           var price = $('#editprice').val();
+           var product = $('#editproduct').val();  
+           
+           if(price != '' || product != ''){  
+                $.ajax({  
+                     url: $('#url').val() + 'product/editProduct',  
+                     method:'POST',  
+                     data:new FormData(this),  
+	                 contentType:false,  
+	                 processData:false,  
+                     success:function(data)  
+                     {   
+                          $('#edit_form')[0].reset();  
+                          $('#editModal').modal('hide'); 
+                          swal("Update Successful!","", "success"); 	  
+                          load_data();              	
+                     }  
+                });  
+           }  
+           else  
+           {  
+                swal("Add Failed!", "Both Fields are Required", "error"); 
+           }  		
+
+	});
+
 	//add quantity to the item
 	$(document).on('click', '.item-add', function(){
 		var product_id = $(this).attr("data");
